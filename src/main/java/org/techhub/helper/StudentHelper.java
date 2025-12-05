@@ -2,6 +2,8 @@ package org.techhub.helper;
 
 import java.util.*;
 import org.techhub.model.EventModel;
+import org.techhub.model.RegistrationModel;
+
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -20,7 +22,7 @@ public class StudentHelper {
             System.out.println("4.Cancle Registration");
             System.out.println("5.Check Event Capacity");
             System.out.println("6.Download Registration Report");
-            
+            System.out.println("7.Get Back");
             System.out.println("Enter your choice");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -89,22 +91,27 @@ public class StudentHelper {
                     ServiceHelper.regService.getRegisteredEvent(StudentHelper.loggedStudentId);
                     break;
                     
+             
                 case 4:
-                	 ServiceHelper.regService.getRegisteredEvent(StudentHelper.loggedStudentId);
-                	 System.out.println("Enter the Event ID to cancle the event");
-                	 int eventid=sc.nextInt();
-                	 
-                	  boolean b=ServiceHelper.regService.isCancelReg(eventid);
-                	  if(b) {
-                		  System.out.println("Registration Cancle Successfully..");
-                		  System.out.println();
-                	  }
-                	  else {
-                		  System.out.println("Registration Not Cancled..");
-                		  System.out.println();
-                	  }
-                	  
-                	break;
+                    List<RegistrationModel> check = ServiceHelper.regService.getRegisteredEvent(StudentHelper.loggedStudentId);
+
+                    if (check.isEmpty()) {
+                        System.out.println("No registrations found — nothing to cancel");
+                        break;
+                    }
+
+                    System.out.println("Enter the Event ID to cancel the event:");
+                    int eventid = sc.nextInt();
+
+                    boolean b = ServiceHelper.regService.isCancelReg(eventid);
+                    if (b) {
+                        System.out.println("Registration Cancelled Successfully..");
+                    } else {
+                        System.out.println("Registration Not Cancelled..\n");
+                    }
+                    break;
+
+               
                 	
                 	
                 case 5:
@@ -164,7 +171,9 @@ public class StudentHelper {
                     }
                     break;
 
-
+                case 7:
+                    System.out.println("Returning to Main Menu...");
+                    return;
                 default:
                     System.out.println("Wrong choice");
             }

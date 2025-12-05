@@ -6,7 +6,7 @@ import org.techhub.repositery.ValidateAdminRepoImpl;
 
 public class ValidateAdminImpl implements ValidateAdmin{
 
-	ValidateAdminRepo adminRepo = new ValidateAdminRepoImpl();
+	ValidateAdminRepo adminRepo = new ValidateAdminRepoImpl();  // repo
 	@Override
 	public boolean varifyAdminLogin(AdminLogin login) {
 		

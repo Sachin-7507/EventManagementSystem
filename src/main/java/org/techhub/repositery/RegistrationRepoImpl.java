@@ -107,7 +107,11 @@ public class RegistrationRepoImpl extends DBInitialize implements RegistrationRe
 							+ "INNER JOIN campuseventdb e ON r.eventid = e.eventid " + "WHERE r.studentid = ?");
 			stmt.setInt(1, studentid);
 			rs = stmt.executeQuery();
-
+			
+			 if(!rs.isBeforeFirst()) {  
+		            return regList;   // return empty → used for checking in cancel
+		        }
+		
 			System.out.println("\n========== Your Registrations ==========");
 			System.out.printf("%-5s %-8s %-25s %-15s %-20s %-15s\n", "RID", "EID", "Event Name", "Date", "Venue",
 					"Reg.Date");
@@ -117,6 +121,11 @@ public class RegistrationRepoImpl extends DBInitialize implements RegistrationRe
 				System.out.printf("%-5d %-8d %-25s %-15s %-20s %-15s\n", rs.getInt("regid"), rs.getInt("eventid"),
 						rs.getString("name"), rs.getString("eventdate"), rs.getString("venue"),
 						rs.getString("regdate"));
+				
+				
+				 RegistrationModel r = new RegistrationModel();
+		            r.setRegid(rs.getInt("regid"));
+		            regList.add(r);					
 			}
 
 			System.out.println("--------------------------------------------------------------------------");
@@ -135,9 +144,10 @@ public class RegistrationRepoImpl extends DBInitialize implements RegistrationRe
 			stmt = conn.prepareStatement(
 					"SELECT r.regid, e.eventid, e.name, e.eventdate, e.venue, r.regdate " + "FROM registration r "
 							+ "INNER JOIN campuseventdb e ON r.eventid = e.eventid " + "WHERE r.studentid = ?");
+			
 			stmt.setInt(1, StudentHelper.loggedStudentId);
 			rs = stmt.executeQuery();
-
+			
 			System.out.println("\n========== Your Registrations ==========");
 			System.out.printf("%-5s %-8s %-25s %-15s %-20s %-15s\n", "RID", "EID", "Event Name", "Date", "Venue",
 					"Reg.Date");
