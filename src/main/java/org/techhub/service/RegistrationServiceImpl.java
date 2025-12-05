@@ -46,4 +46,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 		// TODO Auto-generated method stub
 		return repo.getUserRegistrationPDFData(studentId);
 	}
+
+	@Override
+	public List<EventModel> getEventCapacity() {
+		// TODO Auto-generated method stub
+		return repo.getEventCapacity();
+	}
 }

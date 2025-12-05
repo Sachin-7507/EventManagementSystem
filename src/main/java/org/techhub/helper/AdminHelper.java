@@ -13,7 +13,7 @@ public class AdminHelper {
     public static void startWorking() {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.println("\n1. Event Master");
+            System.out.println("1. Event Master");
             System.out.println("2. Student Master");
             System.out.println("3. Back to login");
             System.out.print("Enter your choice: ");
@@ -255,7 +255,7 @@ public class AdminHelper {
 
                 case 7:
                     List<StudentModel> report = ServiceHelper.studentService.getAllStudent();
-                    ServiceHelper.studentService.geStudentReport(report); // PDF should include contact
+                    ServiceHelper.studentService.geStudentReport(report); 
                     break;
 
                 case 8:
@@ -267,7 +267,6 @@ public class AdminHelper {
             }
         }
     }
-
     
     private static void printEventList(List<EventModel> events, String title) {
     	

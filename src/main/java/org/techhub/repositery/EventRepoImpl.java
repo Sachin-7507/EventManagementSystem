@@ -166,7 +166,7 @@ public class EventRepoImpl extends DBInitialize implements EventRepo{
 	        document.close();
 	        
 	        System.out.println("======================================");
-	        System.out.println("✅ PDF Download Successful!");
+	        System.out.println("PDF Download Successful!");
 	        System.out.println("File saved at: " + pdfPath);
 	        System.out.println("======================================");
 
@@ -182,7 +182,7 @@ public class EventRepoImpl extends DBInitialize implements EventRepo{
 	public List<EventModel> getEventWiseReg() {
 	    try {
 	        stmt = conn.prepareStatement(
-	            "SELECT r.regid AS RegId, r.studentid, r.eventid, r.regdate, " +
+	            "select r.regid AS RegId, r.studentid, r.eventid, r.regdate, " +
 	            "s.name AS StudentName, s.department AS Department, s.email AS Email, " +
 	            "e.name AS EventName, e.eventdate AS EventDate, e.venue AS Venue " +
 	            "FROM student s " +

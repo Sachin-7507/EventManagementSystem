@@ -18,7 +18,9 @@ public class StudentHelper {
             System.out.println("2.Register for the Events");
             System.out.println("3.View All Registration");
             System.out.println("4.Cancle Registration");
-            System.out.println("5.Download Registration Report");
+            System.out.println("5.Check Event Capacity");
+            System.out.println("6.Download Registration Report");
+            
             System.out.println("Enter your choice");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -103,8 +105,15 @@ public class StudentHelper {
                 	  }
                 	  
                 	break;
-
+                	
+                	
                 case 5:
+                	System.out.println("---------------  Event Capacity--------------------");
+                	List<EventModel> ls = ServiceHelper.regService.getEventCapacity();
+                
+                	break;
+
+                case 6:
                     List<Map<String, String>> regs = ServiceHelper.regService.getUserRegistrationPDFData(StudentHelper.loggedStudentId);
                     if (regs.isEmpty()) {
                         System.out.println("No registrations to generate PDF.");
@@ -148,7 +157,7 @@ public class StudentHelper {
                         document.add(table);
                         document.close();
 
-                        System.out.println("✅ PDF generated successfully at: " + pdfPath);
+                        System.out.println("PDF generated successfully");
 
                     } catch (Exception ex) {
                         System.out.println("Error generating PDF: " + ex);

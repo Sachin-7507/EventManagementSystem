@@ -13,6 +13,7 @@ public interface RegistrationService {
     public List<RegistrationModel> getRegisteredEvent(int studentid);
     public boolean isCancelReg(int eventid);
     public List<Map<String, String>> getUserRegistrationPDFData(int studentId);
+    public List<EventModel> getEventCapacity();
     
     
 }
